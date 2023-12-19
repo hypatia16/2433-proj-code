@@ -9,7 +9,7 @@ import joblib
 server = '2433-project-server.database.windows.net'
 database = 'CourseProject'
 username = 'CloudSA314da031'
-password = 'Hypatia@2023'
+password = 'XXXXXX' # add your own password
 driver = '{ODBC Driver 17 for SQL Server}'
 
 # Connect to the database
