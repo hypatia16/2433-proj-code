@@ -1,0 +1,16 @@
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto
+}
+
+.btn {
+    background-color: #BC8F8F;
+    color: white;
+    padding: 10px;
+    font-size: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto
+}
