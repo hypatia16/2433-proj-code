@@ -1,38 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="landing.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="theme-color" content="#000000">
+</head>
+<body>
+  <div class="center-container">
+    <img style="max-width:100%;overflow:hidden;margin:0 auto;" src="./logo.png" alt="">
+  </div>
 
-    <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <link href="landing.css" rel="stylesheet">
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width">
-          <meta name="theme-color" content="#000000">
-        </head>
-        <body>
-          <div class="center-container">
-            <img style="max-width:100%;overflow:hidden;margin:0 auto;" src="./logo.png" alt="">
-          </div>
+  <h2 class="center-container">A&W Insurance</h2>
+  <h5 class="center-container">Welcome To Customer Online Quick Quote Tool</h5>
 
-          <h2 class="center-container">A&W Insurance</h2>
-          <h5 class="center-container">Welcome To Customer Online Quick Quote Tool</h5>
+  <p class="center-container">Access Role:</p>
+  <input id="input" class="center-container"/><br><br>
+  <button id="roleSubmit" class="center-container">Submit</button><br>
+  <div id="tableContainer"></div>
+  <script>
+    document.getElementById('roleSubmit').onclick = function() {
+      var x = document.getElementById('input').value;
 
-          <p class="center-container">Access Role:</p>
-          <input id="input" class="center-container"/><br><br>
-          <button id="roleSubmit" class="center-container">Submit</button><br>
-          <div>
-            <script>
-                      document.getElementById('roleSubmit').onclick = function() //respond to button click event, above
-                      {
-                        var x = document.getElementById('input').value;
+      if (x == "insurancecompany") {
+        fetch('http://127.0.0.1:5000/check_database')
+          .then(response => response.json())
+          .then(data => {
+            var table = document.createElement('table');
+            table.className = 'centered-table';
+            var header = table.createTHead();
+            var row = header.insertRow(0);
+            var columns = ["id", "age", "bmi", "charges", "children", "region", "sex", "smoker"];
+            columns.forEach((column, index) => {
+              var cell = row.insertCell(index);
+              cell.innerHTML = column;
+            });
 
-                        if (x == "insurancecompany") {
-                          window.location.href = "http://127.0.0.1:5000/check_database";
-                        }
+            var body = table.createTBody();
+            data.forEach((item, index) => {
+              var row = body.insertRow(index);
+              columns.forEach((column, index) => {
+                var cell = row.insertCell(index);
+                if (column === "id") {
+                  cell.innerHTML = index + 1;
+                } else {
+                  cell.innerHTML = item[column];
+                }
+              });
+            });
 
-                        else {
-                          alert("Wrong Input")
-                        }
-                      };
-            </script>
-          </div>
-        </body>
-      </html>
+            document.getElementById('tableContainer').appendChild(table);
+          });
+      } else {
+        alert("Wrong Input")
+      }
+    };
+  </script>
+</body>
+</html>
