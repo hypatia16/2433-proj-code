@@ -14,3 +14,18 @@
     display: block;
     margin: 0 auto
 }
+
+.centered-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.centered-table, .centered-table th, .centered-table td {
+  border: 1px solid black;
+}
+
+.centered-table th, .centered-table td {
+  padding: 15px;
+  text-align: center;
+}
