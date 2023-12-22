@@ -4,12 +4,15 @@ from sqlalchemy import text
 import urllib.parse
 import pandas as pd
 import joblib
+from flask_cors import CORS
+
 
 import sys
 print(sys.path)
 
 
 app = Flask(__name__)
+CORS(app)
 
 # Azure SQL connection details
 server = '2433-project-server.database.windows.net'
